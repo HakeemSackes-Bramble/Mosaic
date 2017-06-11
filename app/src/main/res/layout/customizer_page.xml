@@ -13,6 +13,7 @@
         android:gravity="center">
 
         <nyc.c4q.hakeemsackes_bramble.nortmosiac.custom_views.PlayerView
+            android:id="@+id/customizer_player"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -25,12 +26,13 @@
         android:orientation="vertical">
 
         <nyc.c4q.hakeemsackes_bramble.nortmosiac.custom_views.ColorWheelView
-            android:id="@+id/colorwheel"
+            android:id="@+id/customizer_colorwheel"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1" />
 
         <Button
+            android:id="@+id/customizer_finish_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="finish" />

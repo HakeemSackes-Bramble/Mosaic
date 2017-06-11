@@ -5,4 +5,5 @@ package nyc.c4q.hakeemsackes_bramble.nortmosiac.model;
  */
 
 public class BulletDesigns {
+
 }

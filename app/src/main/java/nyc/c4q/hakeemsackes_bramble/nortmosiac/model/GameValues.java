@@ -14,7 +14,7 @@ public class GameValues {
     public float[] getOutputAccel() {
         return outputAccel;
     }
-
+    ArrayList<Player> players = new ArrayList<>();
     private float[] outputAccel;
     private final float ALPHA = 0.9f;
     public GameValues() {
@@ -24,7 +24,7 @@ public class GameValues {
        lowPass(Accel);
     }
 
-    ArrayList<Player> players = new ArrayList<>();
+
 
     private void lowPass( float[] accelValues) {
         if (outputAccel == null) {

@@ -23,6 +23,7 @@ import nyc.c4q.hakeemsackes_bramble.nortmosiac.model.GameValues;
 
 public class MainActivity extends AppCompatActivity {
 
+    private final float bulletSpeed = 20.0f;
     private float angle;
     private float xPosition;
     private float yPosition;
@@ -38,28 +39,30 @@ public class MainActivity extends AppCompatActivity {
     SensorEventListener sensorEventListener = new SensorEventListener() {
         @Override
         public void onSensorChanged(SensorEvent event) {
-            gameValues.setAccel(event.values);
+            // gameValues.setAccel(event.values);
+            outputAccel = event.values;
             lowPass();
-            xPosition += outputAccel[1];
-            yPosition += outputAccel[0];
-            if (xPosition > gameBoard.getWidth() - 8) {
-                xPosition = gameBoard.getWidth() - 8;
+            xPosition += outputAccel[1] * 2;
+            yPosition += outputAccel[0] * 2;
+            if (xPosition > gameBoard.getWidth()) {
+                xPosition = gameBoard.getWidth();
             }
-            if (xPosition < 8) {
-                xPosition = 8;
+            if (xPosition < 0) {
+                xPosition = 0;
             }
-            if (yPosition > gameBoard.getHeight() - 8) {
-                yPosition = gameBoard.getHeight() - 8;
+            if (yPosition > gameBoard.getHeight()) {
+                yPosition = gameBoard.getHeight();
             }
-            if (yPosition < 8) {
+            if (yPosition < 0) {
 
-                yPosition = 8;
+                yPosition = 0;
             }
 
             angle = (float) Math.atan2(outputAccel[1], 0 - outputAccel[0]);
             player.setAngle((float) (angle * (180 / Math.PI)));
             player.setxPosition(xPosition);
             player.setyPosition(yPosition);
+            Log.d("TAGger", "onSensorChanged: " + outputAccel);
 
 
 //            gameBoard.setxPosition(xPosition);
@@ -93,22 +96,20 @@ public class MainActivity extends AppCompatActivity {
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         sensorManager.registerListener(sensorEventListener, accelerometer, SensorManager.SENSOR_DELAY_FASTEST);
-        xPosition = decorView.getWidth() / 2;
-        yPosition = decorView.getHeight() / 2;
+        xPosition = 50;
+        yPosition = 50;
         gameBoard.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 BulletView bullet = new BulletView(getApplicationContext(), null);
-                float bulletSpeed;
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
-                        bulletSpeed = 10.0f;
                         bullet.setBulletType(typeNumb);
-                        bullet.setSize(40);
+                        bullet.setSize(160);
                         typeNumb++;
                         typeNumb %= 5;
-                        bullet.setyPosition(yPosition);
-                        bullet.setxPosition(xPosition);
+                        bullet.setyPosition(yPosition );
+                        bullet.setxPosition(xPosition );
                         bullet.setColorB(Color.rgb(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
                         bullet.setRotation((float) (angle * (180 / Math.PI)));
                         display.addView(bullet);
