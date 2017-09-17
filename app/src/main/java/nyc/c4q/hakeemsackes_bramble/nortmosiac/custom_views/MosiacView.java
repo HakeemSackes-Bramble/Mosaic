@@ -53,6 +53,15 @@ public class MosiacView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        //draw code back here
+
+    }
+    public boolean getIsDrawing() {
+        return isDrawing;
+    }
+}
+
+
 //        if (isDrawing) {
 //            pathArrays.get(pathArrays.size() - 1).moveTo(touchX, touchY);
 //            pathArrays.get(pathArrays.size() - 1).lineTo(xPosition + 10, yPosition + 10);
@@ -62,7 +71,7 @@ public class MosiacView extends View {
 //        for (Path path : pathArrays) {
 //            canvas.drawPath(path, pathPaint);
 //        }
-    }
+
 
 //    @Override
 //    public boolean onTouchEvent(MotionEvent event) {
@@ -87,7 +96,3 @@ public class MosiacView extends View {
 //    }
 //
 
-    public boolean getIsDrawing() {
-        return isDrawing;
-    }
-}

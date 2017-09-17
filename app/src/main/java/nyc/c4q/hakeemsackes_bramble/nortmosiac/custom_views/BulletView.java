@@ -75,7 +75,7 @@ public class BulletView extends View {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-            setMeasuredDimension((int) sizePX, (int) sizePX);
+        setMeasuredDimension((int) sizePX, (int) sizePX);
 
     }
 
@@ -106,11 +106,11 @@ public class BulletView extends View {
     }
 
     public void setxPosition(float xPosition) {
-        this.xPosition = xPosition - (80*scale);
+        this.xPosition = xPosition - (80 * scale);
     }
 
     public void setyPosition(float yPosition) {
-        this.yPosition = yPosition- (80*scale);
+        this.yPosition = yPosition - (80 * scale);
     }
 
     public void setxSpeed(float xSpeed) {

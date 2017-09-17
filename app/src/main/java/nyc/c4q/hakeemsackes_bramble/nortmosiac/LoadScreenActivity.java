@@ -29,7 +29,7 @@ public class LoadScreenActivity extends AppCompatActivity {
     private SensorManager sensorManager;
     private float[] accelValues;
     private float angleM;
-    private SymbolView player;
+    private SymbolView symbolV;
     private RelativeLayout loadLayout;
     private final float ALPHA = 0.9f;
     private float[] outputAccel;
@@ -39,7 +39,7 @@ public class LoadScreenActivity extends AppCompatActivity {
             accelValues = event.values;
             lowPass();
             angleM = (float) Math.atan2(outputAccel[1], 0 - outputAccel[0]);
-            //player.setAngle((float) (angleM * (180 / Math.PI)));
+            //symbolV.setAngle((float) (angleM * (180 / Math.PI)));
 
         }
 
@@ -59,14 +59,14 @@ public class LoadScreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.load_screen_layout);
         loadLayout = (RelativeLayout) findViewById(R.id.load_layout);
-        player = new SymbolView(getApplicationContext(), null);
+        symbolV = new SymbolView(getApplicationContext(), null);
         xPosition = loadLayout.getWidth() / 2;
         yPosition = loadLayout.getHeight() / 2;
         Log.d("TAG", "onCreate: " + xPosition + " " + yPosition);
-        player.setSize(120);
-        player.setxPosition(xPosition);
-        player.setyPosition(yPosition);
-        loadLayout.addView(player);
+        symbolV.setSize(100);
+        symbolV.setxPosition(xPosition);
+        symbolV.setyPosition(yPosition);
+        loadLayout.addView(symbolV);
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         sensorManager.registerListener(sensorEventListener, accelerometer, SensorManager.SENSOR_DELAY_FASTEST);
@@ -104,7 +104,7 @@ public class LoadScreenActivity extends AppCompatActivity {
                 return false;
             }
         });
-        player.setOnClickListener(new View.OnClickListener() {
+        symbolV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), MainActivity.class);

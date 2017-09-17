@@ -22,13 +22,14 @@ public class ColorWheelView extends View {
     float centerPointY;
     Paint paint;
     Color color;
-
+    private final float scale = this.getResources().getDisplayMetrics().density;
     private int colorValue;
+    private PlayerView player;
 
 
     public ColorWheelView(final Context context, AttributeSet attrs) {
         super(context, attrs);
-        radius = 400;
+        radius = 100 * scale;
         color = new Color();
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         displayColor();
@@ -48,6 +49,7 @@ public class ColorWheelView extends View {
                         displayColor();
                         break;
                     case MotionEvent.ACTION_UP:
+                        setPlayerColor(colorValue);
                         break;
                     default:
                         return false;
@@ -84,5 +86,13 @@ public class ColorWheelView extends View {
     }
     public int getColorValue() {
         return colorValue;
+    }
+
+    public void setPlayer(PlayerView player) {
+        this.player = player;
+    }
+
+    public void setPlayerColor(int playerColor) {
+        player.setPlayColor(playerColor);
     }
 }
