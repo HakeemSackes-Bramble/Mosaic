@@ -1,20 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+<FrameLayout
 
-<RelativeLayout
-    android:id="@+id/display_layout_main"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="nyc.c4q.hakeemsackes_bramble.nortmosiac.MainActivity"
+    android:background="#7b5601"
+    android:foregroundGravity="center"
     android:orientation="vertical"
-    android:foregroundGravity="center">
-    <nyc.c4q.hakeemsackes_bramble.nortmosiac.custom_views.MosiacView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/game_board"
+    android:id="@+id/scrolling_frame"
+    tools:context="nyc.c4q.hakeemsackes_bramble.nortmosiac.MainActivity">
+
+    <RelativeLayout
+        android:id="@+id/display_layout_main"
+        android:layout_width="1000dp"
+        android:layout_height="1000dp"
+        android:background="@color/darkGrey"
         >
-    </nyc.c4q.hakeemsackes_bramble.nortmosiac.custom_views.MosiacView>
-</RelativeLayout>
+
+
+    </RelativeLayout>
+</FrameLayout>

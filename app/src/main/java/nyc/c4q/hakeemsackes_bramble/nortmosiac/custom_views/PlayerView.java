@@ -16,6 +16,11 @@ public class PlayerView extends View {
     private Paint paint;
     private float xPosition;
     private float yPosition;
+
+    public int getDimension() {
+        return dimension;
+    }
+
     private int dimension = 40;
     private int playColor;
 

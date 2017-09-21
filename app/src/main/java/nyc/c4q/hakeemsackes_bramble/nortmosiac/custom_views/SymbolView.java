@@ -56,7 +56,7 @@ public class SymbolView extends View {
         invalidate();
     }
 
-    private void drawSymbol(Canvas canvas) {
+    void drawSymbol(Canvas canvas) {
         float[] lines = new float[]{
                 symbolSize / 8, symbolSize / 8,
                 symbolSize / 8, 7 * symbolSize / 8,

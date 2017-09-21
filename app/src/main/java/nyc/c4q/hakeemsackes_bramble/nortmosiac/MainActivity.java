@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -39,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
     private float[] outputAccel;
     //customizer page
     private ColorWheelView colorwheel;
-
     Button finishButton;
     GameValues gameValues = new GameValues();
     private boolean isInGame;
@@ -51,27 +51,29 @@ public class MainActivity extends AppCompatActivity {
             lowPass();
             xPosition += outputAccel[1];
             yPosition += outputAccel[0];
-                if (xPosition > gameBoard.getWidth()) {
-                    xPosition = gameBoard.getWidth();
-                }
-                if (xPosition < 0) {
-                    xPosition = 0;
-                }
-                if (yPosition > gameBoard.getHeight()) {
-                    yPosition = gameBoard.getHeight();
-                }
-                if (yPosition < 0) {
+            if (xPosition > gameBoard.getWidth() - player.getDimension()) {
+                xPosition = gameBoard.getWidth() - player.getDimension();
+            }
 
-                    yPosition = 0;
-                }
+            if (xPosition < 0) {
+                xPosition = 0;
+            }
+            if (yPosition > gameBoard.getHeight() - player.getDimension()) {
+                yPosition = gameBoard.getHeight() - player.getDimension();
+            }
+            if (yPosition < 0) {
+                yPosition = 0;
+            }
 
             angle = (float) Math.atan2(outputAccel[1], 0 - outputAccel[0]);
             player.setAngle((float) (angle * (180 / Math.PI)));
+            if (isInGame) {
+                frame.scrollTo((int) xPosition - frame.getWidth() / 2, (int) yPosition - frame.getHeight() / 2);
+            }
             player.setxPosition(xPosition);
             player.setyPosition(yPosition);
-           // Log.d("TAGger", "onSensorChanged: " + outputAccel);
 
-
+            // Log.d("TAGger", "onSensorChanged: " + outputAccel);
 //            gameBoard.setxPosition(xPosition);
 //            gameBoard.setyPosition(yPosition);
 //            if(gameBoard.getIsDrawing()){
@@ -87,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
     private final float ALPHA = 0.9f;
     private int typeNumb;
     Random rand = new Random();
+    FrameLayout frame;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,19 +100,15 @@ public class MainActivity extends AppCompatActivity {
         colorwheel = (ColorWheelView) findViewById(R.id.customizer_colorwheel);
         player = (PlayerView) findViewById(R.id.customizer_player);
         colorwheel.setPlayer(player);
-        gameBoard=findViewById(R.id.trial_gameboard);
+        gameBoard = findViewById(R.id.trial_gameboard);
+
         setUpAccelerometer();
         finishButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //ViewGroup view = (ViewGroup) getWindow().getDecorView().findViewById(android.R.id.content);
                 setContentView(R.layout.activity_main);
-                player = new PlayerView(getApplicationContext(),null);
-                display = (RelativeLayout) findViewById(R.id.display_layout_main);
-                gameBoard = findViewById(R.id.game_board);
-                player.setPlayColor(colorwheel.getColorValue());
-                isInGame = true;
-                createPlayer();
+                createGame();
 
                 gameBoard.setOnTouchListener(new View.OnTouchListener() {
                     @Override
@@ -129,8 +128,6 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         });
-
-
     }
 
     @Override
@@ -156,16 +153,16 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void setUpAccelerometer(){
+    private void setUpAccelerometer() {
         accelValues = new float[]{0, 0, 0};
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        sensorManager.registerListener(sensorEventListener, accelerometer, SensorManager.SENSOR_DELAY_FASTEST);
+        sensorManager.registerListener(sensorEventListener, accelerometer, SensorManager.SENSOR_DELAY_GAME);
         xPosition = 50;
         yPosition = 50;
     }
 
-    private void shootBullet(BulletView bullet){
+    private void shootBullet(BulletView bullet) {
         bullet.setBulletType(typeNumb);
         bullet.setSize(150);
         typeNumb++;
@@ -182,9 +179,14 @@ public class MainActivity extends AppCompatActivity {
         Log.d("d", "onTouch: hyt" + 9.8 * Math.sin(angle));
     }
 
-    private void createPlayer(){
-
-        Log.d("TAG", "onCreate: " + display + "  "+ player);
+    private void createGame() {
+        player = new PlayerView(getApplicationContext(), null);
+        frame = (FrameLayout) findViewById(R.id.scrolling_frame);
+        display = (RelativeLayout) findViewById(R.id.display_layout_main);
+        gameBoard = findViewById(R.id.display_layout_main);
+        player.setPlayColor(colorwheel.getColorValue());
+        isInGame = true;
         display.addView(player);
+
     }
 }

@@ -45,8 +45,6 @@ public class MosiacView extends View {
         pathPaint.setColor(Color.BLACK);
         drawPath = new Path();
         drawCanvas = new Canvas();
-
-
     }
 
 

@@ -64,9 +64,10 @@ public class ColorWheelView extends View {
     private void displayColor(){
         if (distFromCenter < radius) {
             float transparency = 255;//distFromCenter / radius * 255;
-            float redValue = distanceFromPoint(centerPointX, centerPointY - radius) / (radius) * 255;
-            float greenValue = (distanceFromPoint(centerPointX + (radius * Math.sqrt(3) / 2), centerPointY - (radius / 2)) / (radius)) * 255;
-            float blueValue = (distanceFromPoint(centerPointX - (radius * Math.sqrt(3) / 2), centerPointY - (radius / 2)) / (radius)) * 255;
+            float redValue = distanceFromPoint(centerPointX, centerPointY - radius) / (radius*2) * 255;
+            float greenValue = (distanceFromPoint(centerPointX + (radius * Math.sqrt(3) / 2), centerPointY - (radius / 2)) / (radius*2)) * 255;
+            float blueValue = (distanceFromPoint(centerPointX - (radius * Math.sqrt(3) / 2), centerPointY - (radius / 2)) / (radius*2)) * 255;
+
             colorValue = color.argb((int) transparency, (int) redValue % 256, (int) greenValue % 256, (int) blueValue % 256);
             paint.setColor(colorValue);
             invalidate();

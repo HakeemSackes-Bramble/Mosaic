@@ -10,7 +10,8 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:id="@+id/trial_gameboard">
+        android:id="@+id/trial_gameboard"
+        >
 
         <nyc.c4q.hakeemsackes_bramble.nortmosiac.custom_views.PlayerView
             android:id="@+id/customizer_player"
