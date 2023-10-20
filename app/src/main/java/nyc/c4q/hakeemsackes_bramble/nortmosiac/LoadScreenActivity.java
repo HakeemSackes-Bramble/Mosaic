@@ -7,8 +7,9 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -23,7 +24,7 @@ import nyc.c4q.hakeemsackes_bramble.nortmosiac.custom_views.SymbolView;
  * Created by hakeemsackes-bramble on 5/12/17.
  */
 
-public class LoadScreenActivity extends AppCompatActivity {
+public class LoadScreenActivity extends AppCompatActivity  {
 
     private Sensor accelerometer;
     private SensorManager sensorManager;
@@ -97,7 +98,6 @@ public class LoadScreenActivity extends AppCompatActivity {
                         Log.d("d", "onTouch: hyt" + 9.8 * Math.sin(angleM));
                         break;
                     case MotionEvent.ACTION_MOVE:
-                        break;
                     case MotionEvent.ACTION_UP:
                         break;
                 }

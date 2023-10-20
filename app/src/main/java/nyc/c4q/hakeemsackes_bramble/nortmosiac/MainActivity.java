@@ -6,7 +6,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -23,7 +23,7 @@ import nyc.c4q.hakeemsackes_bramble.nortmosiac.custom_views.ColorWheelView;
 import nyc.c4q.hakeemsackes_bramble.nortmosiac.custom_views.PlayerView;
 import nyc.c4q.hakeemsackes_bramble.nortmosiac.model.GameValues;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity  {
 
 
     private final float bulletSpeed = 20.0f;
@@ -94,7 +94,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        googleApiClient = new GoogleApiClient.Builder(getApplicationContext());
         setContentView(R.layout.customizer_page);
         finishButton = (Button) findViewById(R.id.customizer_finish_button);
         colorwheel = (ColorWheelView) findViewById(R.id.customizer_colorwheel);
@@ -181,8 +180,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void createGame() {
         player = new PlayerView(getApplicationContext(), null);
-        frame = (FrameLayout) findViewById(R.id.scrolling_frame);
-        display = (RelativeLayout) findViewById(R.id.display_layout_main);
+        frame = findViewById(R.id.scrolling_frame);
+        display =findViewById(R.id.display_layout_main);
         gameBoard = findViewById(R.id.display_layout_main);
         player.setPlayColor(colorwheel.getColorValue());
         isInGame = true;
